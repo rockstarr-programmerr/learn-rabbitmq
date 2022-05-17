@@ -21,10 +21,11 @@ for level in levels:
         exchange='logs_direct',
         routing_key=level,
     )
-    channel.basic_consume(
-        queue=console_log_queue.method.queue,
-        on_message_callback=console_log_callback,
-    )
+
+channel.basic_consume(
+    queue=console_log_queue.method.queue,
+    on_message_callback=console_log_callback,
+)
 
 # Log to file
 file_log_queue = channel.queue_declare('', exclusive=True)
